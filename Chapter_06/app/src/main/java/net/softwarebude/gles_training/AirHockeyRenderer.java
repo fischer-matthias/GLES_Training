@@ -115,16 +115,14 @@ public class AirHockeyRenderer implements GLSurfaceView.Renderer {
         glViewport(0, 0, width, height);
 
         MatrixHelper.perspectiveM(projectionMatrix, 45.0f, (float) width / height, 1.0f, 10.0f);
-
         setIdentityM(modelMatrix, 0);
-        translateM(modelMatrix, 0, 0f, 0f, -2f);
 
-//        final float aspectRatio = width > height ? (float) width / (float) height : (float) height / (float) width;
-//        if(width > height) {
-//            orthoM(projectionMatrix, 0, -aspectRatio, aspectRatio, -1.0f, 1.0f, -1.0f, 1.0f);
-//        } else {
-//            orthoM(projectionMatrix, 0, -1.0f, 1.0f, -aspectRatio, aspectRatio, -1.0f, 1.0f);
-//        }
+        translateM(modelMatrix, 0, 0f, 0f, -2.5f);
+        rotateM(modelMatrix, 0, -60f, 1f, 0f, 0f);
+
+        final float[] temp = new float[16];
+        multiplyMM(temp, 0, projectionMatrix, 0, modelMatrix, 0);
+        System.arraycopy(temp, 0, projectionMatrix, 0, temp.length);
     }
 
     @Override
